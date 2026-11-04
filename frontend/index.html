@@ -4,22 +4,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Masuk - Platform Pengelolaan Tugas</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <h1>Platform Pengelolaan Tugas</h1>
+  <div class="wadah">
+    <h1>Platform Pengelolaan Tugas</h1>
+    <p class="sub">Catat tugas kuliah, pantau status, dan jangan lewatkan tenggat.</p>
 
-  <h2>Daftar akun</h2>
-  <input id="daftar-nama" type="text" placeholder="Nama lengkap">
-  <input id="daftar-email" type="email" placeholder="Email">
-  <input id="daftar-password" type="password" placeholder="Password (min. 6 karakter)">
-  <button id="btn-daftar">Daftar</button>
+    <div class="kartu">
+      <h2>Masuk</h2>
+      <input id="masuk-email" type="email" placeholder="Email">
+      <input id="masuk-password" type="password" placeholder="Password">
+      <button id="btn-masuk">Masuk</button>
+    </div>
 
-  <h2>Masuk</h2>
-  <input id="masuk-email" type="email" placeholder="Email">
-  <input id="masuk-password" type="password" placeholder="Password">
-  <button id="btn-masuk">Masuk</button>
+    <div class="kartu">
+      <h2>Belum punya akun? Daftar</h2>
+      <input id="daftar-nama" type="text" placeholder="Nama lengkap">
+      <input id="daftar-email" type="email" placeholder="Email">
+      <input id="daftar-password" type="password" placeholder="Password (min. 6 karakter)">
+      <button id="btn-daftar" class="sekunder">Daftar</button>
+    </div>
 
-  <p id="pesan"></p>
+    <p id="pesan" class="pesan"></p>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
   <script src="js/config.js"></script>

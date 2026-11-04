@@ -4,22 +4,32 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tugas Saya - Platform Pengelolaan Tugas</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <h1>Tugas Saya</h1>
-  <p id="info-user"></p>
-  <button id="btn-keluar">Keluar</button>
+  <div class="wadah">
+    <div class="baris-atas">
+      <div>
+        <h1>Tugas Saya</h1>
+        <p id="info-user" class="sub"></p>
+      </div>
+      <button id="btn-keluar" class="sekunder">Keluar</button>
+    </div>
 
-  <h2>Tambah tugas</h2>
-  <input id="tugas-judul" type="text" placeholder="Judul tugas">
-  <input id="tugas-matkul" type="text" placeholder="Mata kuliah">
-  <input id="tugas-deadline" type="datetime-local">
-  <button id="btn-tambah">Tambah</button>
+    <div class="kartu">
+      <h2>Tambah tugas</h2>
+      <input id="tugas-judul" type="text" placeholder="Judul tugas">
+      <input id="tugas-matkul" type="text" placeholder="Mata kuliah">
+      <input id="tugas-deadline" type="datetime-local">
+      <button id="btn-tambah">Tambah</button>
+      <p id="pesan" class="pesan"></p>
+    </div>
 
-  <p id="pesan"></p>
-
-  <h2>Daftar tugas</h2>
-  <ul id="daftar-tugas"></ul>
+    <div class="kartu">
+      <h2>Daftar tugas</h2>
+      <ul id="daftar-tugas" class="daftar-tugas"></ul>
+    </div>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
   <script src="js/config.js"></script>
