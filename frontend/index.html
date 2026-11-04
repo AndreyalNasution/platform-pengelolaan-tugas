@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Masuk - Platform Pengelolaan Tugas</title>
+</head>
+<body>
+  <h1>Platform Pengelolaan Tugas</h1>
+
+  <h2>Daftar akun</h2>
+  <input id="daftar-nama" type="text" placeholder="Nama lengkap">
+  <input id="daftar-email" type="email" placeholder="Email">
+  <input id="daftar-password" type="password" placeholder="Password (min. 6 karakter)">
+  <button id="btn-daftar">Daftar</button>
+
+  <h2>Masuk</h2>
+  <input id="masuk-email" type="email" placeholder="Email">
+  <input id="masuk-password" type="password" placeholder="Password">
+  <button id="btn-masuk">Masuk</button>
+
+  <p id="pesan"></p>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>
