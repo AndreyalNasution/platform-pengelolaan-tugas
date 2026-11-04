@@ -36,6 +36,6 @@ document.getElementById("btn-masuk").addEventListener("click", async () => {
   if (error) {
     pesan.textContent = "Gagal masuk: " + error.message;
   } else {
-    pesan.textContent = "Berhasil masuk sebagai " + data.user.email;
+    window.location.href = "tugas.html";
   }
 });
