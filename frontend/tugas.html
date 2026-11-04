@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tugas Saya - Platform Pengelolaan Tugas</title>
+</head>
+<body>
+  <h1>Tugas Saya</h1>
+  <p id="info-user"></p>
+  <button id="btn-keluar">Keluar</button>
+
+  <h2>Tambah tugas</h2>
+  <input id="tugas-judul" type="text" placeholder="Judul tugas">
+  <input id="tugas-matkul" type="text" placeholder="Mata kuliah">
+  <input id="tugas-deadline" type="datetime-local">
+  <button id="btn-tambah">Tambah</button>
+
+  <p id="pesan"></p>
+
+  <h2>Daftar tugas</h2>
+  <ul id="daftar-tugas"></ul>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/tasks.js"></script>
+</body>
+</html>
