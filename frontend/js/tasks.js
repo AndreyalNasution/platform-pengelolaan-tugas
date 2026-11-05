@@ -9,14 +9,14 @@ const infoUser = document.getElementById("info-user");
 async function mulai() {
   const { data } = await sb.auth.getSession();
   if (!data.session) {
-    window.location.href = "index.html"; // belum login, kembali ke halaman masuk
+    window.location.href = "index.html";
     return;
   }
   infoUser.textContent = "Masuk sebagai " + data.session.user.email;
   await muatTugas();
 }
 
-// Mengambil semua tugas milik pengguna (RLS otomatis membatasi ke miliknya)
+// Mengambil semua tugas milik pengguna (RLS membatasi ke miliknya)
 async function muatTugas() {
   const { data, error } = await sb
     .from("tasks")
@@ -28,6 +28,21 @@ async function muatTugas() {
     return;
   }
   tampilkanTugas(data);
+}
+
+// PB-07: mengubah status satu tugas
+async function ubahStatus(id, statusBaru) {
+  const { error } = await sb
+    .from("tasks")
+    .update({ status: statusBaru })
+    .eq("id", id);
+
+  if (error) {
+    pesan.textContent = "Gagal mengubah status: " + error.message;
+    return;
+  }
+  pesan.textContent = "Status diperbarui.";
+  await muatTugas();
 }
 
 // Menggambar daftar tugas di halaman
@@ -63,12 +78,29 @@ function tampilkanTugas(tugas) {
     kiri.appendChild(judul);
     kiri.appendChild(meta);
 
+    // Bagian kanan: lencana status + dropdown untuk mengubah status
+    const kanan = document.createElement("div");
+
     const badge = document.createElement("span");
     badge.className = "badge badge-" + t.status;
     badge.textContent = t.status;
 
+    const pilih = document.createElement("select");
+    pilih.className = "pilih-status";
+    ["belum", "sedang", "selesai"].forEach((s) => {
+      const opsi = document.createElement("option");
+      opsi.value = s;
+      opsi.textContent = s;
+      if (t.status === s) opsi.selected = true;
+      pilih.appendChild(opsi);
+    });
+    pilih.addEventListener("change", () => ubahStatus(t.id, pilih.value));
+
+    kanan.appendChild(badge);
+    kanan.appendChild(pilih);
+
     li.appendChild(kiri);
-    li.appendChild(badge);
+    li.appendChild(kanan);
     daftar.appendChild(li);
   });
 }
