@@ -45,6 +45,28 @@ async function ubahStatus(id, statusBaru) {
   await muatTugas();
 }
 
+// PB-08: menghapus satu tugas
+async function hapusTugas(id, judul) {
+  if (!confirm('Hapus tugas "' + judul + '"?')) return;
+
+  const { data, error } = await sb
+    .from("tasks")
+    .delete()
+    .eq("id", id)
+    .select();
+
+  if (error) {
+    pesan.textContent = "Gagal menghapus tugas: " + error.message;
+    return;
+  }
+  if (!data || data.length === 0) {
+    pesan.textContent = "Tugas tidak ditemukan atau bukan milik akun ini.";
+    return;
+  }
+  pesan.textContent = "Tugas dihapus.";
+  await muatTugas();
+}
+
 // Menggambar daftar tugas di halaman
 function tampilkanTugas(tugas) {
   daftar.innerHTML = "";
@@ -78,7 +100,7 @@ function tampilkanTugas(tugas) {
     kiri.appendChild(judul);
     kiri.appendChild(meta);
 
-    // Bagian kanan: lencana status + dropdown untuk mengubah status
+    // Bagian kanan: lencana status + dropdown status + tombol hapus
     const kanan = document.createElement("div");
 
     const badge = document.createElement("span");
@@ -96,8 +118,15 @@ function tampilkanTugas(tugas) {
     });
     pilih.addEventListener("change", () => ubahStatus(t.id, pilih.value));
 
+    const hapus = document.createElement("button");
+    hapus.type = "button";
+    hapus.className = "btn-hapus";
+    hapus.textContent = "Hapus";
+    hapus.addEventListener("click", () => hapusTugas(t.id, t.title));
+
     kanan.appendChild(badge);
     kanan.appendChild(pilih);
+    kanan.appendChild(hapus);
 
     li.appendChild(kiri);
     li.appendChild(kanan);

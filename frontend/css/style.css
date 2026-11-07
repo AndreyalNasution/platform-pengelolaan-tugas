@@ -89,3 +89,17 @@ button.sekunder { background: #fff; color: var(--teks); border: 1px solid var(--
 @media (max-width: 480px) {
   .tugas-item { flex-direction: column; align-items: flex-start; }
 }
+
+.btn-hapus {
+  margin-left: 8px;
+  padding: 6px 10px;
+  border: 1px solid #fca5a5;
+  background: #fff;
+  color: #b91c1c;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+}
+.btn-hapus:hover {
+  background: #fee2e2;
+}
