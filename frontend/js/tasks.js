@@ -8,6 +8,9 @@ const infoUser = document.getElementById("info-user");
 const inJudul = document.getElementById("tugas-judul");
 const inMatkul = document.getElementById("tugas-matkul");
 const inDeadline = document.getElementById("tugas-deadline");
+// PB-12: jarak pengingat (hari sebelum tenggat)
+const inPengingat = document.getElementById("tugas-pengingat");
+const PENGINGAT_DEFAULT = 3;
 const btnTambah = document.getElementById("btn-tambah");
 const teksTambahAsli = btnTambah.textContent;
 
@@ -86,6 +89,16 @@ async function hapusTugas(id, judul) {
   await muatTugas();
 }
 
+// PB-12: membaca dan memeriksa kolom jarak pengingat
+// Mengembalikan angka bulat 0-365, atau null jika tidak valid
+function bacaPengingat() {
+  const teks = inPengingat.value.trim();
+  if (teks === "") return PENGINGAT_DEFAULT;
+  const angka = Number(teks);
+  if (!Number.isInteger(angka) || angka < 0 || angka > 365) return null;
+  return angka;
+}
+
 // PB-11: mengubah ISO (dari database) menjadi nilai untuk kolom tenggat di form
 function keNilaiInput(iso) {
   const d = new Date(iso);
@@ -101,6 +114,7 @@ function mulaiUbah(t) {
   inJudul.value = t.title;
   inMatkul.value = t.course || "";
   inDeadline.value = keNilaiInput(t.deadline);
+  inPengingat.value = t.reminder_days ?? PENGINGAT_DEFAULT;
   btnTambah.textContent = "Simpan perubahan";
   btnBatal.hidden = false;
   pesan.textContent = 'Mengubah tugas "' + t.title + '".';
@@ -113,6 +127,7 @@ function keluarModeUbah() {
   inJudul.value = "";
   inMatkul.value = "";
   inDeadline.value = "";
+  inPengingat.value = PENGINGAT_DEFAULT;
   btnTambah.textContent = teksTambahAsli;
   btnBatal.hidden = true;
 }
@@ -150,7 +165,10 @@ function tampilkanTugas(tugas) {
       dateStyle: "medium",
       timeStyle: "short",
     });
-    meta.textContent = (t.course || "Tanpa mata kuliah") + " • Tenggat " + tenggat;
+    meta.textContent =
+      (t.course || "Tanpa mata kuliah") +
+      " • Tenggat " + tenggat +
+      " • Pengingat " + (t.reminder_days ?? PENGINGAT_DEFAULT) + " hari sebelumnya";
 
     kiri.appendChild(judul);
     kiri.appendChild(meta);
@@ -208,6 +226,13 @@ btnTambah.addEventListener("click", async () => {
     return;
   }
 
+  // PB-12: jarak pengingat harus bilangan bulat 0-365
+  const pengingat = bacaPengingat();
+  if (pengingat === null) {
+    pesan.textContent = "Jarak pengingat harus bilangan bulat 0 sampai 365 hari.";
+    return;
+  }
+
   // PB-11: mode ubah -> perbarui tugas yang dipilih
   if (idSedangDiubah) {
     const { data, error } = await sb
@@ -216,6 +241,7 @@ btnTambah.addEventListener("click", async () => {
         title: judul,
         course: matkul || null,
         deadline: new Date(deadline).toISOString(),
+        reminder_days: pengingat,
       })
       .eq("id", idSedangDiubah)
       .select();
@@ -239,6 +265,7 @@ btnTambah.addEventListener("click", async () => {
     title: judul,
     course: matkul || null,
     deadline: new Date(deadline).toISOString(),
+    reminder_days: pengingat,
   });
 
   if (error) {
@@ -250,6 +277,7 @@ btnTambah.addEventListener("click", async () => {
   inJudul.value = "";
   inMatkul.value = "";
   inDeadline.value = "";
+  inPengingat.value = PENGINGAT_DEFAULT;
   await muatTugas();
 });
 
