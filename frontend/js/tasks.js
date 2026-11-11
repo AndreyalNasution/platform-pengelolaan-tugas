@@ -26,6 +26,17 @@ btnBatal.style.marginLeft = "8px";
 btnBatal.hidden = true;
 btnTambah.insertAdjacentElement("afterend", btnBatal);
 
+// PB-13: panel Pengingat Tenggat (dibuat lewat JS, disisipkan sebelum kartu daftar tugas)
+const panelPengingat = document.createElement("div");
+panelPengingat.className = "kartu";
+const judulPengingat = document.createElement("h2");
+const daftarPengingat = document.createElement("ul");
+daftarPengingat.className = daftar.className;
+panelPengingat.appendChild(judulPengingat);
+panelPengingat.appendChild(daftarPengingat);
+const kartuDaftar = daftar.closest(".kartu") || daftar;
+kartuDaftar.insertAdjacentElement("beforebegin", panelPengingat);
+
 // Dipanggil saat halaman dibuka: pastikan sudah login
 async function mulai() {
   const { data } = await sb.auth.getSession();
@@ -137,8 +148,89 @@ btnBatal.addEventListener("click", () => {
   pesan.textContent = "Perubahan dibatalkan.";
 });
 
+// PB-13: selisih hari kalender antara hari ini dan hari tenggat
+// (0 = hari ini, positif = belum tiba, negatif = sudah lewat)
+function selisihHari(iso, sekarang = new Date()) {
+  const hariIni = new Date(sekarang.getFullYear(), sekarang.getMonth(), sekarang.getDate());
+  const d = new Date(iso);
+  const hariTenggat = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  return Math.round((hariTenggat - hariIni) / 86400000);
+}
+
+// PB-13: teks label pengingat
+function labelPengingat(selisih) {
+  if (selisih < 0) return "Terlambat " + Math.abs(selisih) + " hari";
+  if (selisih === 0) return "Hari ini";
+  return "H-" + selisih;
+}
+
+// PB-13: tugas yang belum selesai dan tenggatnya sudah masuk jarak pengingat
+function tugasPerluDiingatkan(tugas, sekarang = new Date()) {
+  return tugas.filter((t) => {
+    if (t.status === "selesai") return false;
+    const jarak = t.reminder_days ?? PENGINGAT_DEFAULT;
+    return selisihHari(t.deadline, sekarang) <= jarak;
+  });
+}
+
+// PB-13: menggambar panel Pengingat Tenggat
+function tampilkanPengingat(tugas) {
+  const perlu = tugasPerluDiingatkan(tugas);
+  judulPengingat.textContent = "Pengingat tenggat (" + perlu.length + ")";
+  daftarPengingat.innerHTML = "";
+
+  if (perlu.length === 0) {
+    const kosong = document.createElement("li");
+    kosong.className = "kosong";
+    kosong.textContent = "Tidak ada tugas yang perlu diingatkan.";
+    daftarPengingat.appendChild(kosong);
+    return;
+  }
+
+  perlu.forEach((t) => {
+    const selisih = selisihHari(t.deadline);
+
+    const li = document.createElement("li");
+    li.className = "tugas-item";
+
+    const kiri = document.createElement("div");
+    const judul = document.createElement("div");
+    judul.className = "tugas-judul";
+    judul.textContent = t.title;
+    const meta = document.createElement("div");
+    meta.className = "tugas-meta";
+    const tenggat = new Date(t.deadline).toLocaleString("id-ID", {
+      dateStyle: "medium",
+      timeStyle: "short",
+    });
+    meta.textContent = (t.course || "Tanpa mata kuliah") + " • Tenggat " + tenggat;
+    kiri.appendChild(judul);
+    kiri.appendChild(meta);
+
+    const label = document.createElement("span");
+    label.textContent = labelPengingat(selisih);
+    label.style.padding = "2px 10px";
+    label.style.borderRadius = "999px";
+    label.style.fontSize = "13px";
+    label.style.fontWeight = "600";
+    label.style.whiteSpace = "nowrap";
+    if (selisih <= 0) {
+      label.style.background = "#fee2e2";
+      label.style.color = "#b91c1c";
+    } else {
+      label.style.background = "#fef3c7";
+      label.style.color = "#92400e";
+    }
+
+    li.appendChild(kiri);
+    li.appendChild(label);
+    daftarPengingat.appendChild(li);
+  });
+}
+
 // Menggambar daftar tugas di halaman
 function tampilkanTugas(tugas) {
+  tampilkanPengingat(tugas);
   daftar.innerHTML = "";
 
   if (tugas.length === 0) {
