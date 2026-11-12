@@ -1,62 +1,85 @@
 :root {
-  --warna-utama: #2563eb;
-  --bg: #f1f5f9;
+  --warna-utama: #0f8a63;
+  --warna-utama-gelap: #0c7453;
+  --warna-utama-muda: #e3f5ec;
+  --bg: #f5f7f6;
   --kartu: #ffffff;
-  --teks: #0f172a;
-  --teks-redup: #64748b;
-  --garis: #e2e8f0;
+  --teks: #17211c;
+  --teks-redup: #6b7a73;
+  --garis: #e3e9e5;
+  --bahaya: #b42318;
+  --bahaya-muda: #fdecea;
 }
 
 * { box-sizing: border-box; }
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
   background: var(--bg);
   color: var(--teks);
   line-height: 1.5;
 }
 
-.wadah { max-width: 720px; margin: 0 auto; padding: 24px 16px; }
+.wadah { max-width: 860px; margin: 0 auto; padding: 28px 16px 40px; }
 
 .kartu {
   background: var(--kartu);
   border: 1px solid var(--garis);
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 16px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  border-radius: 14px;
+  padding: 22px;
+  margin-bottom: 18px;
+  box-shadow: 0 1px 2px rgba(16, 24, 20, 0.04);
 }
 
-h1 { font-size: 1.5rem; margin: 0 0 4px; }
-h2 { font-size: 1.1rem; margin: 0 0 12px; }
+h1 { font-size: 1.6rem; margin: 0 0 4px; letter-spacing: -0.01em; }
+h2 { font-size: 1.05rem; margin: 0 0 14px; font-weight: 700; }
 .sub { color: var(--teks-redup); margin: 0 0 20px; }
+
+label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 4px 0 6px;
+}
 
 input {
   width: 100%;
-  padding: 10px 12px;
+  padding: 11px 13px;
   border: 1px solid var(--garis);
-  border-radius: 8px;
+  border-radius: 10px;
   font: inherit;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   background: #fff;
+  color: var(--teks);
 }
-input:focus { outline: 2px solid var(--warna-utama); border-color: transparent; }
+input::placeholder { color: #9aa8a1; }
+input:focus {
+  outline: 2px solid var(--warna-utama);
+  outline-offset: 0;
+  border-color: transparent;
+}
 
 button {
   font: inherit;
   font-weight: 600;
-  padding: 10px 16px;
+  padding: 10px 18px;
   border: 0;
-  border-radius: 8px;
+  border-radius: 10px;
   background: var(--warna-utama);
   color: #fff;
   cursor: pointer;
+  transition: background 0.15s ease;
 }
-button:hover { opacity: 0.9; }
-button.sekunder { background: #fff; color: var(--teks); border: 1px solid var(--garis); }
+button:hover { background: var(--warna-utama-gelap); }
+button.sekunder {
+  background: #fff;
+  color: var(--teks);
+  border: 1px solid var(--garis);
+}
+button.sekunder:hover { background: #f3f6f4; }
 
-.pesan { min-height: 1.5em; font-size: 0.95rem; color: var(--teks-redup); }
+.pesan { min-height: 1.5em; font-size: 0.95rem; color: var(--teks-redup); margin: 12px 0 0; }
 
 .baris-atas {
   display: flex;
@@ -64,7 +87,23 @@ button.sekunder { background: #fff; color: var(--teks); border: 1px solid var(--
   align-items: center;
   gap: 12px;
   flex-wrap: wrap;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
+}
+
+/* Penanda merek di judul halaman tugas (mengikuti mockup TugasKu) */
+.baris-atas h1::before {
+  content: "\2713";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  border-radius: 9px;
+  background: var(--warna-utama);
+  color: #fff;
+  font-size: 1rem;
+  vertical-align: 2px;
 }
 
 .daftar-tugas { list-style: none; margin: 0; padding: 0; }
@@ -73,33 +112,72 @@ button.sekunder { background: #fff; color: var(--teks); border: 1px solid var(--
   justify-content: space-between;
   align-items: center;
   gap: 12px;
-  padding: 12px 0;
+  padding: 14px 8px;
   border-bottom: 1px solid var(--garis);
+  border-radius: 8px;
 }
+.tugas-item:hover { background: #f8faf9; }
 .tugas-item:last-child { border-bottom: 0; }
 .tugas-judul { font-weight: 600; }
 .tugas-meta { font-size: 0.85rem; color: var(--teks-redup); }
 .kosong { color: var(--teks-redup); padding: 8px 0; }
 
-.badge { font-size: 0.75rem; font-weight: 600; padding: 2px 10px; border-radius: 999px; }
-.badge-belum { background: #fee2e2; color: #b91c1c; }
-.badge-sedang { background: #fef3c7; color: #b45309; }
-.badge-selesai { background: #dcfce7; color: #15803d; }
+/* Sisi kiri melebar, sisi kanan (status dan tombol) tidak turun baris */
+.tugas-item > div:first-child { flex: 1; min-width: 0; }
+.tugas-item > div:last-child { display: flex; align-items: center; flex-shrink: 0; }
+
+/* Tugas selesai tampil redup, seperti pada mockup */
+.tugas-item:has(.badge-selesai) .tugas-judul { color: var(--teks-redup); }
+
+/* Tombol dan kontrol di dalam baris tugas dibuat sama besar */
+.tugas-item button { padding: 6px 12px; font-size: 13px; border-radius: 8px; }
+.pilih-status {
+  font: inherit;
+  font-size: 13px;
+  padding: 5px 8px;
+  margin-left: 8px;
+  border: 1px solid var(--garis);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--teks);
+}
+
+/* Label status mengikuti warna mockup: abu, kuning, hijau */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 3px 11px;
+  border-radius: 999px;
+}
+.badge::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.badge-belum { background: #eef1ef; color: #4b5852; }
+.badge-sedang { background: #fdf0c9; color: #8a5a00; }
+.badge-selesai { background: var(--warna-utama-muda); color: #0b6b4a; }
 
 @media (max-width: 480px) {
   .tugas-item { flex-direction: column; align-items: flex-start; }
+  .tugas-item > div:last-child { flex-wrap: wrap; row-gap: 8px; }
 }
 
 .btn-hapus {
   margin-left: 8px;
-  padding: 6px 10px;
-  border: 1px solid #fca5a5;
+  padding: 6px 12px;
+  border: 1px solid #f4b5ae;
   background: #fff;
-  color: #b91c1c;
+  color: var(--bahaya);
   border-radius: 8px;
   cursor: pointer;
   font-size: 13px;
 }
 .btn-hapus:hover {
-  background: #fee2e2;
+  background: var(--bahaya-muda);
 }
