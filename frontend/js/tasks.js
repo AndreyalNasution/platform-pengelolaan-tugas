@@ -11,6 +11,12 @@ const inDeadline = document.getElementById("tugas-deadline");
 // PB-12: jarak pengingat (hari sebelum tenggat)
 const inPengingat = document.getElementById("tugas-pengingat");
 const PENGINGAT_DEFAULT = 3;
+// PB-14: teks status yang ditampilkan (nilai di database tetap belum/sedang/selesai)
+const LABEL_STATUS = {
+  belum: "Belum Dikerjakan",
+  sedang: "Sedang Dikerjakan",
+  selesai: "Selesai",
+};
 const btnTambah = document.getElementById("btn-tambah");
 const teksTambahAsli = btnTambah.textContent;
 
@@ -25,6 +31,15 @@ btnBatal.textContent = "Batal";
 btnBatal.style.marginLeft = "8px";
 btnBatal.hidden = true;
 btnTambah.insertAdjacentElement("afterend", btnBatal);
+
+// PB-14: tiga kartu hitungan status (dibuat lewat JS, disisipkan di atas form tambah tugas)
+const ringkasan = document.createElement("div");
+ringkasan.style.display = "grid";
+ringkasan.style.gridTemplateColumns = "repeat(auto-fit, minmax(160px, 1fr))";
+ringkasan.style.gap = "12px";
+ringkasan.style.marginBottom = "18px";
+const kartuForm = inJudul.closest(".kartu") || btnTambah;
+kartuForm.insertAdjacentElement("beforebegin", ringkasan);
 
 // PB-13: panel Pengingat Tenggat (dibuat lewat JS, disisipkan sebelum kartu daftar tugas)
 const panelPengingat = document.createElement("div");
@@ -148,6 +163,63 @@ btnBatal.addEventListener("click", () => {
   pesan.textContent = "Perubahan dibatalkan.";
 });
 
+// PB-14: menghitung jumlah tugas per status
+function hitungPerStatus(tugas) {
+  const hasil = { belum: 0, sedang: 0, selesai: 0 };
+  tugas.forEach((t) => {
+    if (hasil[t.status] !== undefined) hasil[t.status] += 1;
+  });
+  return hasil;
+}
+
+// PB-14: menggambar tiga kartu hitungan status
+function tampilkanRingkasan(tugas) {
+  const jumlah = hitungPerStatus(tugas);
+  const warna = {
+    belum: { latar: "#eef1ef", teks: "#4b5852" },
+    sedang: { latar: "#fdf0c9", teks: "#8a5a00" },
+    selesai: { latar: "#e3f5ec", teks: "#0b6b4a" },
+  };
+  ringkasan.innerHTML = "";
+  ["belum", "sedang", "selesai"].forEach((s) => {
+    const kartu = document.createElement("div");
+    kartu.style.background = "#fff";
+    kartu.style.border = "1px solid #e3e9e5";
+    kartu.style.borderRadius = "14px";
+    kartu.style.padding = "14px 16px";
+    kartu.style.display = "flex";
+    kartu.style.alignItems = "center";
+    kartu.style.gap = "12px";
+
+    const titik = document.createElement("div");
+    titik.style.width = "38px";
+    titik.style.height = "38px";
+    titik.style.borderRadius = "10px";
+    titik.style.background = warna[s].latar;
+    titik.style.color = warna[s].teks;
+    titik.style.display = "flex";
+    titik.style.alignItems = "center";
+    titik.style.justifyContent = "center";
+    titik.style.fontWeight = "700";
+    titik.textContent = jumlah[s];
+
+    const teks = document.createElement("div");
+    const nama = document.createElement("div");
+    nama.textContent = LABEL_STATUS[s];
+    nama.style.fontSize = "0.85rem";
+    nama.style.color = "#6b7a73";
+    const angka = document.createElement("div");
+    angka.textContent = jumlah[s] + " tugas";
+    angka.style.fontWeight = "700";
+    teks.appendChild(nama);
+    teks.appendChild(angka);
+
+    kartu.appendChild(titik);
+    kartu.appendChild(teks);
+    ringkasan.appendChild(kartu);
+  });
+}
+
 // PB-13: selisih hari kalender antara hari ini dan hari tenggat
 // (0 = hari ini, positif = belum tiba, negatif = sudah lewat)
 function selisihHari(iso, sekarang = new Date()) {
@@ -230,6 +302,7 @@ function tampilkanPengingat(tugas) {
 
 // Menggambar daftar tugas di halaman
 function tampilkanTugas(tugas) {
+  tampilkanRingkasan(tugas);
   tampilkanPengingat(tugas);
   daftar.innerHTML = "";
 
@@ -270,14 +343,14 @@ function tampilkanTugas(tugas) {
 
     const badge = document.createElement("span");
     badge.className = "badge badge-" + t.status;
-    badge.textContent = t.status;
+    badge.textContent = LABEL_STATUS[t.status] || t.status;
 
     const pilih = document.createElement("select");
     pilih.className = "pilih-status";
     ["belum", "sedang", "selesai"].forEach((s) => {
       const opsi = document.createElement("option");
       opsi.value = s;
-      opsi.textContent = s;
+      opsi.textContent = LABEL_STATUS[s];
       if (t.status === s) opsi.selected = true;
       pilih.appendChild(opsi);
     });
