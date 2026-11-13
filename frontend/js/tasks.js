@@ -23,13 +23,12 @@ const teksTambahAsli = btnTambah.textContent;
 // PB-11: id tugas yang sedang diubah (null = mode tambah)
 let idSedangDiubah = null;
 
-// Tombol Batal (dibuat lewat JS, tampil hanya saat mode ubah)
+// Tombol Batal (dibuat lewat JS, selalu tampil di dalam pop-up)
 const btnBatal = document.createElement("button");
 btnBatal.type = "button";
 btnBatal.className = "sekunder";
 btnBatal.textContent = "Batal";
 btnBatal.style.marginLeft = "8px";
-btnBatal.hidden = true;
 btnTambah.insertAdjacentElement("afterend", btnBatal);
 
 // PB-14: tiga kartu hitungan status (dibuat lewat JS, disisipkan di atas form tambah tugas)
@@ -51,6 +50,84 @@ panelPengingat.appendChild(judulPengingat);
 panelPengingat.appendChild(daftarPengingat);
 const kartuDaftar = daftar.closest(".kartu") || daftar;
 kartuDaftar.insertAdjacentElement("beforebegin", panelPengingat);
+
+// PB-14 Tahap 3b: form tambah/ubah tugas tampil sebagai pop-up (modal)
+const judulForm = kartuForm.querySelector("h2");
+if (judulForm) {
+  judulForm.textContent = "Tambah Tugas";
+  judulForm.id = "judul-form";
+  kartuForm.setAttribute("aria-labelledby", "judul-form");
+}
+const subForm = document.createElement("p");
+subForm.className = "sub";
+subForm.textContent = "Lengkapi detail tugas kuliah dan atur kapan pengingat muncul.";
+if (judulForm) judulForm.insertAdjacentElement("afterend", subForm);
+
+// Pesan galat form tampil di dalam pop-up, pesan umum dipindah ke luar pop-up
+const pesanForm = document.createElement("p");
+pesanForm.className = "pesan";
+btnTambah.insertAdjacentElement("beforebegin", pesanForm);
+ringkasan.insertAdjacentElement("afterend", pesan);
+btnTambah.textContent = "Simpan";
+
+const btnTutupX = document.createElement("button");
+btnTutupX.type = "button";
+btnTutupX.className = "modal-tutup";
+btnTutupX.textContent = "\u00D7";
+btnTutupX.setAttribute("aria-label", "Tutup");
+kartuForm.insertAdjacentElement("afterbegin", btnTutupX);
+
+const latarModal = document.createElement("div");
+latarModal.className = "modal-latar";
+kartuForm.classList.add("modal-kartu");
+kartuForm.setAttribute("role", "dialog");
+kartuForm.setAttribute("aria-modal", "true");
+latarModal.appendChild(kartuForm);
+document.body.appendChild(latarModal);
+
+// Tombol "+ Tambah Tugas" di bagian atas halaman
+const btnBuka = document.createElement("button");
+btnBuka.type = "button";
+btnBuka.id = "btn-buka-form";
+btnBuka.textContent = "+ Tambah Tugas";
+const btnKeluar = document.getElementById("btn-keluar");
+const grupAtas = document.createElement("div");
+grupAtas.className = "grup-aksi-atas";
+btnKeluar.insertAdjacentElement("beforebegin", grupAtas);
+grupAtas.appendChild(btnBuka);
+grupAtas.appendChild(btnKeluar);
+
+function modalTerbuka() {
+  return latarModal.classList.contains("terbuka");
+}
+function bukaModal() {
+  latarModal.classList.add("terbuka");
+  document.body.style.overflow = "hidden";
+  pesanForm.textContent = "";
+  inJudul.focus();
+}
+function tutupModal() {
+  latarModal.classList.remove("terbuka");
+  document.body.style.overflow = "";
+  pesanForm.textContent = "";
+}
+function batalkanForm() {
+  const sedangUbah = idSedangDiubah !== null;
+  keluarModeUbah();
+  if (sedangUbah) pesan.textContent = "Perubahan dibatalkan.";
+}
+btnBuka.addEventListener("click", () => {
+  kosongkanForm();
+  bukaModal();
+});
+btnBatal.addEventListener("click", batalkanForm);
+btnTutupX.addEventListener("click", batalkanForm);
+latarModal.addEventListener("mousedown", (e) => {
+  if (e.target === latarModal) batalkanForm();
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && modalTerbuka()) batalkanForm();
+});
 
 // Dipanggil saat halaman dibuka: pastikan sudah login
 async function mulai() {
@@ -142,26 +219,27 @@ function mulaiUbah(t) {
   inDeadline.value = keNilaiInput(t.deadline);
   inPengingat.value = t.reminder_days ?? PENGINGAT_DEFAULT;
   btnTambah.textContent = "Simpan perubahan";
-  btnBatal.hidden = false;
-  pesan.textContent = 'Mengubah tugas "' + t.title + '".';
-  inJudul.focus();
+  if (judulForm) judulForm.textContent = "Ubah Tugas";
+  pesan.textContent = "";
+  bukaModal();
 }
 
-// PB-11: keluar dari mode ubah, kosongkan form
-function keluarModeUbah() {
+// PB-14 Tahap 3b: kosongkan form dan kembali ke mode tambah (pop-up tidak ditutup)
+function kosongkanForm() {
   idSedangDiubah = null;
   inJudul.value = "";
   inMatkul.value = "";
   inDeadline.value = "";
   inPengingat.value = PENGINGAT_DEFAULT;
-  btnTambah.textContent = teksTambahAsli;
-  btnBatal.hidden = true;
+  btnTambah.textContent = "Simpan";
+  if (judulForm) judulForm.textContent = "Tambah Tugas";
 }
 
-btnBatal.addEventListener("click", () => {
-  keluarModeUbah();
-  pesan.textContent = "Perubahan dibatalkan.";
-});
+// PB-11: keluar dari mode ubah, kosongkan form dan tutup pop-up
+function keluarModeUbah() {
+  kosongkanForm();
+  tutupModal();
+}
 
 // PB-14: menghitung jumlah tugas per status
 function hitungPerStatus(tugas) {
@@ -300,6 +378,19 @@ function tampilkanPengingat(tugas) {
   });
 }
 
+// PB-14 Tahap 3a: menutup semua menu aksi yang sedang terbuka
+function tutupSemuaMenu() {
+  document.querySelectorAll(".menu-aksi.terbuka").forEach((m) => {
+    m.classList.remove("terbuka");
+    const tombol = m.parentElement.querySelector(".btn-menu");
+    if (tombol) tombol.setAttribute("aria-expanded", "false");
+  });
+}
+document.addEventListener("click", tutupSemuaMenu);
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") tutupSemuaMenu();
+});
+
 // Menggambar daftar tugas di halaman
 function tampilkanTugas(tugas) {
   tampilkanRingkasan(tugas);
@@ -356,23 +447,57 @@ function tampilkanTugas(tugas) {
     });
     pilih.addEventListener("change", () => ubahStatus(t.id, pilih.value));
 
-    const ubah = document.createElement("button");
-    ubah.type = "button";
-    ubah.className = "sekunder";
-    ubah.style.marginLeft = "8px";
-    ubah.textContent = "Ubah";
-    ubah.addEventListener("click", () => mulaiUbah(t));
+    // PB-14 Tahap 3a: menu aksi "..." berisi Ubah dan Hapus (seperti mockup)
+    const menuWadah = document.createElement("span");
+    menuWadah.className = "menu-wadah";
 
-    const hapus = document.createElement("button");
-    hapus.type = "button";
-    hapus.className = "btn-hapus";
-    hapus.textContent = "Hapus";
-    hapus.addEventListener("click", () => hapusTugas(t.id, t.title));
+    const btnMenu = document.createElement("button");
+    btnMenu.type = "button";
+    btnMenu.className = "btn-menu";
+    btnMenu.textContent = "\u22EF";
+    btnMenu.setAttribute("aria-label", "Aksi untuk tugas " + t.title);
+    btnMenu.setAttribute("aria-haspopup", "true");
+    btnMenu.setAttribute("aria-expanded", "false");
+
+    const menu = document.createElement("div");
+    menu.className = "menu-aksi";
+
+    const itemUbah = document.createElement("button");
+    itemUbah.type = "button";
+    itemUbah.className = "menu-item";
+    itemUbah.textContent = "Ubah";
+    itemUbah.addEventListener("click", () => {
+      tutupSemuaMenu();
+      mulaiUbah(t);
+    });
+
+    const itemHapus = document.createElement("button");
+    itemHapus.type = "button";
+    itemHapus.className = "menu-item menu-hapus";
+    itemHapus.textContent = "Hapus";
+    itemHapus.addEventListener("click", () => {
+      tutupSemuaMenu();
+      hapusTugas(t.id, t.title);
+    });
+
+    btnMenu.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const sedangTerbuka = menu.classList.contains("terbuka");
+      tutupSemuaMenu();
+      if (!sedangTerbuka) {
+        menu.classList.add("terbuka");
+        btnMenu.setAttribute("aria-expanded", "true");
+      }
+    });
+
+    menu.appendChild(itemUbah);
+    menu.appendChild(itemHapus);
+    menuWadah.appendChild(btnMenu);
+    menuWadah.appendChild(menu);
 
     kanan.appendChild(badge);
     kanan.appendChild(pilih);
-    kanan.appendChild(ubah);
-    kanan.appendChild(hapus);
+    kanan.appendChild(menuWadah);
 
     li.appendChild(kiri);
     li.appendChild(kanan);
@@ -387,14 +512,14 @@ btnTambah.addEventListener("click", async () => {
   const deadline = inDeadline.value;
 
   if (!judul || !deadline) {
-    pesan.textContent = "Judul dan tenggat wajib diisi.";
+    pesanForm.textContent = "Judul dan tenggat wajib diisi.";
     return;
   }
 
   // PB-12: jarak pengingat harus bilangan bulat 0-365
   const pengingat = bacaPengingat();
   if (pengingat === null) {
-    pesan.textContent = "Jarak pengingat harus bilangan bulat 0 sampai 365 hari.";
+    pesanForm.textContent = "Jarak pengingat harus bilangan bulat 0 sampai 365 hari.";
     return;
   }
 
@@ -412,11 +537,11 @@ btnTambah.addEventListener("click", async () => {
       .select();
 
     if (error) {
-      pesan.textContent = "Gagal menyimpan perubahan: " + error.message;
+      pesanForm.textContent = "Gagal menyimpan perubahan: " + error.message;
       return;
     }
     if (!data || data.length === 0) {
-      pesan.textContent = "Tugas tidak ditemukan atau bukan milik akun ini.";
+      pesanForm.textContent = "Tugas tidak ditemukan atau bukan milik akun ini.";
       return;
     }
     keluarModeUbah();
@@ -434,15 +559,12 @@ btnTambah.addEventListener("click", async () => {
   });
 
   if (error) {
-    pesan.textContent = "Gagal menambah tugas: " + error.message;
+    pesanForm.textContent = "Gagal menambah tugas: " + error.message;
     return;
   }
 
   pesan.textContent = "Tugas ditambahkan.";
-  inJudul.value = "";
-  inMatkul.value = "";
-  inDeadline.value = "";
-  inPengingat.value = PENGINGAT_DEFAULT;
+  keluarModeUbah();
   await muatTugas();
 });
 
