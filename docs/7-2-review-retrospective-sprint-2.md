@@ -3,7 +3,7 @@
 Proyek: Platform Pengelolaan Tugas dan Pengingat Tenggat Waktu Mata Kuliah Berbasis Web
 Sprint 2: 9-14 November 2026 (6 hari)
 Status: DRAF, menunggu pemeriksaan dan pendapat tim
-Catatan: susunan awal dibuat dengan bantuan AI dari papan GitHub Projects, riwayat commit, dan catatan kejadian selama sprint, lalu diperiksa tim. Bagian bertanda [ISI] dilengkapi tim.
+Catatan: susunan awal dibuat dengan bantuan AI dari papan GitHub Projects, riwayat commit, dan catatan kejadian selama sprint, lalu diperiksa tim. Angka story point diambil dari dokumen 3-1. Butir retrospective diusulkan dengan bantuan AI dan disetujui tim pada 14 November 2026.
 
 ## 1. Sprint Review
 
@@ -24,7 +24,7 @@ Menyelesaikan fitur ubah tugas, pengingat tenggat, dan tampilan sesuai mockup, s
 | PB-17 | Dokumen Tahap D (risiko, mutu, Test Plan, DoD) | Andri | Done | Ditambahkan ke papan 12 November |
 | PB-18 | Dokumen Tahap E (komunikasi, RACI, Git, standar kode) | Jhon | Done | Ditambahkan ke papan 12 November |
 
-Story point direncanakan: [ISI dari tabel 3-1]. Story point selesai: [ISI]. Velocity Sprint 2: [ISI] story point.
+Story point direncanakan: 16 (item 8-11 pada tabel 3-1). Story point selesai: 16, karena keempat item (PB-11 sampai PB-14) berstatus Done. Velocity Sprint 2: 16 story point. Kartu dokumen (PB-10 dan PB-15 sampai PB-19) tidak diberi story point.
 
 ### 1.3 Perubahan selama sprint (change request)
 1. 12 November: kartu PB-17 dan PB-18 ditambahkan untuk dokumen Tahap D dan Tahap E.
@@ -46,20 +46,20 @@ Story point direncanakan: [ISI dari tabel 3-1]. Story point selesai: [ISI]. Velo
 - Fitur inti selesai dan diuji sebelum ditutup.
 - Pekerjaan tampilan dipecah menjadi tahap kecil yang diuji satu per satu.
 - Pesan commit konsisten memuat nomor kartu.
-- [ISI pendapat tim]
+- Tim bekerja bersama di satu tempat sehingga kendala cepat dibahas dan diselesaikan.
 
 ### 2.2 Yang menyulitkan
 - Dua anggota berhalangan pada 9 November sehingga pekerjaan dialihkan.
 - Kesalahan operasi Git berulang, misalnya lupa git add dan patch gagal karena baris akhir file.
 - File sempat dibuat di laptop yang berbeda dari pemilik kartu.
 - Komentar progres pada kartu papan belum dibuat secara konsisten.
-- [ISI pendapat tim]
+- Langkah Git dan terminal masih sering memerlukan panduan sehingga beberapa langkah perlu diulang.
 
 ### 2.3 Perbaikan untuk Sprint 3
 1. Pemilik kartu menjalankan pekerjaannya di laptop sendiri agar riwayat commit sesuai pembagian peran.
 2. Setiap kartu diberi komentar singkat saat pindah status (tanggal, apa yang selesai, siapa yang mengerjakan).
 3. Jam kerja dan pemakaian AI dicatat setiap hari.
-4. [ISI usulan tim]
+4. Membuat daftar langkah Git tertulis (pull, add, commit, push) agar setiap anggota dapat bekerja mandiri.
 
 ## 3. Rencana Sprint 3 (15-20 November 2026)
 | Tanggal | Kegiatan |
