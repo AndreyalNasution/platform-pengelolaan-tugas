@@ -391,6 +391,9 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") tutupSemuaMenu();
 });
 
+// PB-14 Tahap 3c: kelompok status yang sedang dilipat (tetap dilipat setelah daftar dimuat ulang)
+const grupTertutup = new Set();
+
 // Menggambar daftar tugas di halaman
 function tampilkanTugas(tugas) {
   tampilkanRingkasan(tugas);
@@ -404,6 +407,9 @@ function tampilkanTugas(tugas) {
     daftar.appendChild(kosong);
     return;
   }
+
+  // PB-14 Tahap 3c: baris dikumpulkan per status dulu, lalu digambar per kelompok
+  const barisPerStatus = { belum: [], sedang: [], selesai: [] };
 
   tugas.forEach((t) => {
     const li = document.createElement("li");
@@ -501,7 +507,48 @@ function tampilkanTugas(tugas) {
 
     li.appendChild(kiri);
     li.appendChild(kanan);
-    daftar.appendChild(li);
+    (barisPerStatus[t.status] || barisPerStatus.belum).push(li);
+  });
+
+  // PB-14 Tahap 3c: daftar dikelompokkan per status, tiap kelompok bisa dilipat
+  ["belum", "sedang", "selesai"].forEach((status) => {
+    const baris = barisPerStatus[status];
+    if (baris.length === 0) return;
+    const tertutup = grupTertutup.has(status);
+
+    const kepala = document.createElement("li");
+    kepala.className = "grup-status" + (tertutup ? " tertutup" : "");
+    const tombol = document.createElement("button");
+    tombol.type = "button";
+    tombol.className = "grup-tombol";
+    tombol.setAttribute("aria-expanded", tertutup ? "false" : "true");
+    const panah = document.createElement("span");
+    panah.className = "grup-panah";
+    panah.textContent = "\u25BE";
+    const nama = document.createElement("span");
+    nama.textContent = LABEL_STATUS[status];
+    const jumlah = document.createElement("span");
+    jumlah.className = "grup-jumlah";
+    jumlah.textContent = baris.length;
+    tombol.appendChild(panah);
+    tombol.appendChild(nama);
+    tombol.appendChild(jumlah);
+    kepala.appendChild(tombol);
+    daftar.appendChild(kepala);
+
+    baris.forEach((li) => {
+      li.hidden = tertutup;
+      daftar.appendChild(li);
+    });
+
+    tombol.addEventListener("click", () => {
+      const tutup = !grupTertutup.has(status);
+      if (tutup) grupTertutup.add(status);
+      else grupTertutup.delete(status);
+      kepala.classList.toggle("tertutup", tutup);
+      tombol.setAttribute("aria-expanded", tutup ? "false" : "true");
+      baris.forEach((li) => (li.hidden = tutup));
+    });
   });
 }
 

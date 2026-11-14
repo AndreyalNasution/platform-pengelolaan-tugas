@@ -261,3 +261,35 @@ button.sekunder:hover { background: #f3f6f4; }
 .modal-kartu .pesan:empty { min-height: 0; margin: 0; }
 #pesan { margin: 0 0 16px; }
 #pesan:empty { display: none; }
+
+/* PB-14 Tahap 3c: daftar dikelompokkan per status */
+.grup-status {
+  border-bottom: 1px solid var(--garis);
+  background: var(--bg);
+}
+.grup-status .grup-tombol {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 8px;
+  background: none;
+  color: var(--teks);
+  border: 0;
+  border-radius: 0;
+  font-size: 0.95rem;
+  text-align: left;
+}
+.grup-status .grup-tombol:hover { background: #eef2f0; }
+.grup-panah { display: inline-block; transition: transform 0.15s; }
+.grup-status.tertutup .grup-panah { transform: rotate(-90deg); }
+.grup-jumlah {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid var(--garis);
+  color: var(--teks-redup);
+}
+.tugas-item[hidden] { display: none; }
