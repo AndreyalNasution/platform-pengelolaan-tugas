@@ -1,4 +1,4 @@
-﻿# 7.1 Review dan Retrospective Sprint 1
+# 7.1 Review dan Retrospective Sprint 1
 
 Periode: 3 sampai 8 November 2026
 Status: DRAF, menunggu pemeriksaan Andre dan Jhon. Masukan Andri ditambahkan setelah ia kembali.
@@ -20,7 +20,7 @@ Catatan: susunan awal dirangkum dengan bantuan AI dari kejadian yang tercatat se
 
 **Belum ada di akhir Sprint 1:** pemilihan metodologi (bagian 1.5 Bab 1), ubah isi tugas, dan fitur pengingat tenggat. Ketiganya dijadwalkan di Sprint 2.
 
-**Perubahan jadwal:** total waktu proyek diperpanjang dari 14 hari menjadi 18 hari (tiga sprint masing-masing 6 hari). Persetujuan dosen untuk angka 18 hari perlu dikonfirmasi.
+**Perubahan jadwal:** total waktu proyek diperpanjang dari 14 hari menjadi 18 hari (tiga sprint masing-masing 6 hari). Dosen pengampu menyerahkan durasi sprint kepada tim, sehingga angka 18 hari ditetapkan berdasarkan kesepakatan tim.
 
 ## B. Retrospective
 
@@ -44,4 +44,4 @@ Catatan: susunan awal dirangkum dengan bantuan AI dari kejadian yang tercatat se
 2. Buat semua kartu Sprint 2 di awal sprint (9 November).
 3. Lakukan git pull sebelum mulai bekerja, dan commit sebelum pull bila ada perubahan lokal.
 4. Pemilihan metodologi (1.5) dikerjakan Andri, dan Bab 1 dirapikan (konsistensi 18 hari, angka survei, istilah).
-5. Konfirmasi angka 18 hari ke dosen pengampu atau sesuaikan kalimat persetujuan di Charter.
+5. Konfirmasi angka 18 hari ke dosen pengampu atau sesuaikan kalimat persetujuan di Charter. (Selesai 14 November 2026: dosen menyerahkan durasi sprint kepada tim; kalimat di Bab 1 disesuaikan.)

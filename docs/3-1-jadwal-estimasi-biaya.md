@@ -7,7 +7,7 @@ Catatan: susunan awal dibuat dengan bantuan AI dari dokumen yang sudah ada (SRS,
 
 ## 1. Dasar perencanaan
 - Periode proyek: 3 sampai 20 November 2026, tiga sprint masing-masing 6 hari (Sprint 1: 3-8 Nov, Sprint 2: 9-14 Nov, Sprint 3: 15-20 Nov).
-- Angka 18 hari belum dikonfirmasi dosen pengampu (sebelumnya disepakati 14 hari).
+- Angka 18 hari disepakati tim; dosen pengampu menyerahkan durasi sprint kepada tim (sebelumnya disepakati 14 hari).
 - Tim: Andre (PM, Developer), Jhon (Developer frontend, Tester), Andri (Analis, dokumentasi, UI/UX, Tester).
 - Metodologi: Agile/Scrum. Pelacakan lewat papan sprint GitHub Projects.
 
@@ -114,7 +114,7 @@ Risiko jalur kritis: PB-12, PB-13, dan PB-14 semuanya dipegang Jhon dalam 5 hari
 
 | No | Perubahan | Tanggal | Alasan |
 |----|-----------|---------|--------|
-| 1 | Durasi proyek 14 hari menjadi 18 hari | (isi tanggal dari catatan tim) | Perlu waktu pengujian dan UAT; persetujuan dosen belum dikonfirmasi |
+| 1 | Durasi proyek 14 hari menjadi 18 hari | (isi tanggal dari catatan tim) | Perlu waktu pengujian dan UAT; durasi sprint diserahkan dosen pengampu kepada tim |
 | 2 | Item 6 dan 7 (ubah status, hapus) dikerjakan di Sprint 1 | 5-8 Nov (sesuai riwayat commit) | Selesai lebih awal dari jadwal |
 | 3 | Kartu PB-09 sampai PB-16 ditambahkan di papan | 8 Nov | Kartu Sprint 2 dibuat setelah Sprint 1 berjalan |
 | 4 | Item 11 (PB-14, tampilan sesuai mockup) ditambahkan ke backlog | 8 Nov | Mockup selesai di Sprint 1 dan perlu diterapkan |
@@ -158,4 +158,4 @@ BAC ini menjadi dasar analisis EVM pada Tahap G. Nilai PV per sprint ditetapkan 
 1. Setuju atau tidak dengan nilai story point di bagian 2.2.
 2. Setuju atau tidak dengan tarif dan jam rencana di bagian 7.
 3. Bila PB-14 terlambat: mockup penuh atau versi sederhana.
-4. Konfirmasi angka 18 hari ke dosen pengampu.
+4. Selesai: dosen pengampu menyerahkan durasi sprint kepada tim (bukti chat WhatsApp).
