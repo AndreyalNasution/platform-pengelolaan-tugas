@@ -1,36 +1,73 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7f6">
   <title>Masuk - Platform Pengelolaan Tugas</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-  <div class="wadah">
-    <h1>Platform Pengelolaan Tugas</h1>
-    <p class="sub">Catat tugas kuliah, pantau status, dan jangan lewatkan tenggat.</p>
+<body class="halaman-login">
+  <main class="login-shell">
+    <section class="login-intro" aria-label="Tentang Platform Pengelolaan Tugas">
+      <a class="login-brand" href="#" aria-label="Platform Pengelolaan Tugas">
+        <span class="login-logo" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.3 4.2L19 7"/></svg></span>
+        <span>Platform Pengelolaan Tugas</span>
+      </a>
+      <div class="intro-copy">
+        <span class="intro-kicker"><span class="kicker-dot"></span> Ruang belajar yang lebih teratur</span>
+        <h1>Waktu untuk belajar. <span>Semua tugas tertata.</span></h1>
+        <p>Rencanakan tenggat, pantau progres, dan jaga fokusmu tetap pada hal yang penting.</p>
+        <div class="preview-card" aria-hidden="true">
+          <div class="preview-top"><span class="preview-label">CONTOH TAMPILAN</span><span class="preview-pill">&#9679; Terus maju</span></div>
+          <div class="preview-number">4 <small>dari 6 tugas selesai</small></div>
+          <div class="progress-track"><span></span></div>
+          <div class="preview-task"><span class="task-check">&#10003;</span><span>Rangkuman materi kuliah</span><span class="task-state">Selesai</span></div>
+          <div class="preview-task"><span class="task-empty"></span><span>Proyek kelompok</span><span class="task-date">Besok</span></div>
+        </div>
+      </div>
+      <div class="intro-footer"><span class="footer-mark">&#10035;</span> Satu langkah kecil, setiap hari.</div>
+    </section>
 
-    <div class="kartu">
-      <h2>Masuk</h2>
-      <input id="masuk-email" type="email" placeholder="Email">
-      <input id="masuk-password" type="password" placeholder="Password">
-      <button id="btn-masuk">Masuk</button>
-    </div>
+    <section class="login-side" aria-label="Akses akun">
+      <div class="auth-card">
+        <div class="mobile-brand"><span class="login-logo" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.3 4.2L19 7"/></svg></span><span>Platform Pengelolaan Tugas</span></div>
+        <div class="auth-heading">
+          <p class="auth-eyebrow">AKUN MAHASISWA</p>
+          <h2 id="judul-auth">Senang melihatmu lagi</h2>
+          <p class="auth-subtitle" id="deskripsi-auth">Masuk untuk melanjutkan rencanamu hari ini.</p>
+        </div>
+        <div class="auth-tabs" role="tablist" aria-label="Pilih akses akun">
+          <button class="auth-tab aktif" type="button" role="tab" aria-selected="true" aria-controls="panel-masuk" data-tab="masuk">Masuk</button>
+          <button class="auth-tab" type="button" role="tab" aria-selected="false" aria-controls="panel-daftar" data-tab="daftar">Buat akun</button>
+        </div>
 
-    <div class="kartu">
-      <h2>Belum punya akun? Daftar</h2>
-      <input id="daftar-nama" type="text" placeholder="Nama lengkap">
-      <input id="daftar-email" type="email" placeholder="Email">
-      <input id="daftar-password" type="password" placeholder="Password (min. 6 karakter)">
-      <button id="btn-daftar" class="sekunder">Daftar</button>
-    </div>
+        <div class="auth-panel" id="panel-masuk" role="tabpanel" data-panel="masuk">
+          <label for="masuk-email">Email</label>
+          <input id="masuk-email" type="email" autocomplete="email" placeholder="nama@kampus.ac.id">
+          <label for="masuk-password">Kata sandi</label>
+          <input id="masuk-password" type="password" autocomplete="current-password" placeholder="Masukkan kata sandi">
+          <button id="btn-masuk" class="auth-submit" type="button">Masuk ke akun <span aria-hidden="true">&rarr;</span></button>
+        </div>
 
-    <p id="pesan" class="pesan"></p>
-  </div>
-
+        <div class="auth-panel" id="panel-daftar" role="tabpanel" data-panel="daftar" hidden>
+          <label for="daftar-nama">Nama lengkap</label>
+          <input id="daftar-nama" type="text" autocomplete="name" placeholder="Nama yang kamu gunakan">
+          <label for="daftar-email">Email</label>
+          <input id="daftar-email" type="email" autocomplete="email" placeholder="nama@kampus.ac.id">
+          <label for="daftar-password">Kata sandi</label>
+          <input id="daftar-password" type="password" autocomplete="new-password" placeholder="Buat kata sandi">
+          <button id="btn-daftar" class="auth-submit" type="button">Buat akun <span aria-hidden="true">&rarr;</span></button>
+        </div>
+        <p id="pesan" class="auth-message" aria-live="polite"></p>
+        <p class="auth-note"><span aria-hidden="true">&#9635;</span> Setiap akun hanya dapat melihat tugasnya sendiri.</p>
+      </div>
+      <p class="side-caption">Dibuat untuk membantu perjalanan kuliahmu.</p>
+    </section>
+  </main>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
   <script src="js/config.js"></script>
   <script src="js/auth.js"></script>
+  <script src="js/login-ui.js"></script>
 </body>
 </html>
