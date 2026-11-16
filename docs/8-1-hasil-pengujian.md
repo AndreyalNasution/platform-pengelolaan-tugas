@@ -22,16 +22,16 @@ Status: Lulus, Gagal, atau Belum diuji. Bila Gagal, catat nomor bug di kolom ket
 | TC-05 | FR-02 | Masuk dengan password yang salah | Muncul pesan gagal, tetap di halaman login | Muncul pesan gagal, tetap di halaman login | Lulus | Andre | 15 Nov 2026 | Diuji ulang 16 Nov 2026 pada tampilan login baru: Lulus |
 | TC-06 | FR-03 | Klik tombol Keluar | Sesi berakhir dan kembali ke halaman login | Kembali ke halaman login | Lulus | Andre | 15 Nov 2026 | |
 | TC-07 | FR-04 | Membuka halaman tugas tanpa login | Diarahkan ke halaman login | Membuka /frontend/tugas.html setelah keluar diarahkan ke halaman login | Lulus | Andre | 15 Nov 2026 | |
-| TC-08 | FR-05 | Menambah tugas dengan judul, mata kuliah, dan tenggat lewat pop-up | Tugas muncul di daftar | | Belum diuji | | | |
-| TC-09 | FR-05 | Menambah tugas tanpa judul atau tanpa tenggat | Muncul pesan "Judul dan tenggat wajib diisi." di pop-up, tugas tidak tersimpan | | Belum diuji | | | |
-| TC-10 | FR-06 | Menambah beberapa tugas dengan tenggat berbeda | Dalam tiap kelompok status, daftar terurut dari tenggat terdekat | | Belum diuji | | | |
-| TC-11 | FR-07 | Mengubah judul, mata kuliah, dan tenggat lewat menu Ubah lalu menyimpan | Perubahan tampil dan tetap ada setelah halaman dimuat ulang | | Belum diuji | | | |
-| TC-12 | FR-07 | Memulai ubah lalu menekan Batal | Pop-up tertutup dan data tugas tidak berubah | | Belum diuji | | | |
-| TC-13 | FR-08 | Menghapus tugas dan menyetujui konfirmasi | Tugas hilang dan tidak muncul lagi setelah dimuat ulang | | Belum diuji | | | |
-| TC-14 | FR-08 | Menghapus tugas lalu membatalkan konfirmasi | Tugas tetap ada | | Belum diuji | | | |
-| TC-15 | FR-09 | Mengubah status dari belum ke sedang lalu selesai | Status berubah, tugas pindah kelompok, dan tetap setelah dimuat ulang | | Belum diuji | | | |
-| TC-16 | FR-10 | Mengisi jarak pengingat 5 hari saat menambah tugas | Nilai tersimpan dan tampil pada tugas | | Belum diuji | | | |
-| TC-17 | FR-10 | Mengisi jarak pengingat tidak valid (-1 atau 400) | Ditolak dengan pesan, tugas tidak tersimpan | | Belum diuji | | | |
+| TC-08 | FR-05 | Menambah tugas dengan judul, mata kuliah, dan tenggat lewat pop-up | Tugas muncul di daftar | Sesuai hasil yang diharapkan | Lulus | Jhon | 16 Nov 2026 | |
+| TC-09 | FR-05 | Menambah tugas tanpa judul atau tanpa tenggat | Muncul pesan "Judul dan tenggat wajib diisi." di pop-up, tugas tidak tersimpan | Sesuai hasil yang diharapkan | Lulus | Jhon | 16 Nov 2026 | |
+| TC-10 | FR-06 | Menambah beberapa tugas dengan tenggat berbeda | Dalam tiap kelompok status, daftar terurut dari tenggat terdekat | Sesuai hasil yang diharapkan | Lulus | Jhon | 16 Nov 2026 | |
+| TC-11 | FR-07 | Mengubah judul, mata kuliah, dan tenggat lewat menu Ubah lalu menyimpan | Perubahan tampil dan tetap ada setelah halaman dimuat ulang | Sesuai hasil yang diharapkan | Lulus | Jhon | 16 Nov 2026 | |
+| TC-12 | FR-07 | Memulai ubah lalu menekan Batal | Pop-up tertutup dan data tugas tidak berubah | Sesuai hasil yang diharapkan | Lulus | Jhon | 16 Nov 2026 | |
+| TC-13 | FR-08 | Menghapus tugas dan menyetujui konfirmasi | Tugas hilang dan tidak muncul lagi setelah dimuat ulang | Sesuai hasil yang diharapkan | Lulus | Jhon | 16 Nov 2026 | |
+| TC-14 | FR-08 | Menghapus tugas lalu membatalkan konfirmasi | Tugas tetap ada | Sesuai hasil yang diharapkan | Lulus | Jhon | 16 Nov 2026 | |
+| TC-15 | FR-09 | Mengubah status dari belum ke sedang lalu selesai | Status berubah, tugas pindah kelompok, dan tetap setelah dimuat ulang | Sesuai hasil yang diharapkan | Lulus | Jhon | 16 Nov 2026 | |
+| TC-16 | FR-10 | Mengisi jarak pengingat 5 hari saat menambah tugas | Nilai tersimpan dan tampil pada tugas | Sesuai hasil yang diharapkan | Lulus | Jhon | 16 Nov 2026 | |
+| TC-17 | FR-10 | Mengisi jarak pengingat tidak valid (-1 atau 400) | Ditolak dengan pesan, tugas tidak tersimpan | Sesuai hasil yang diharapkan | Lulus | Jhon | 16 Nov 2026 | |
 | TC-18 | FR-11 | Tugas belum selesai dengan tenggat di dalam jarak pengingat | Muncul di panel pengingat dengan label hari ini atau H-n | | Belum diuji | | | |
 | TC-19 | FR-11 | Tugas dengan tenggat di luar jarak pengingat | Tidak muncul di panel pengingat | | Belum diuji | | | |
 | TC-20 | FR-11 | Tugas dalam jarak pengingat yang diubah statusnya menjadi selesai | Hilang dari panel pengingat | | Belum diuji | | | |
