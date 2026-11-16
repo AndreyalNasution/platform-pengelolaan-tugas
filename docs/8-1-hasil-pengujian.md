@@ -32,10 +32,10 @@ Status: Lulus, Gagal, atau Belum diuji. Bila Gagal, catat nomor bug di kolom ket
 | TC-15 | FR-09 | Mengubah status dari belum ke sedang lalu selesai | Status berubah, tugas pindah kelompok, dan tetap setelah dimuat ulang | Sesuai hasil yang diharapkan | Lulus | Jhon | 16 Nov 2026 | |
 | TC-16 | FR-10 | Mengisi jarak pengingat 5 hari saat menambah tugas | Nilai tersimpan dan tampil pada tugas | Sesuai hasil yang diharapkan | Lulus | Jhon | 16 Nov 2026 | |
 | TC-17 | FR-10 | Mengisi jarak pengingat tidak valid (-1 atau 400) | Ditolak dengan pesan, tugas tidak tersimpan | Sesuai hasil yang diharapkan | Lulus | Jhon | 16 Nov 2026 | |
-| TC-18 | FR-11 | Tugas belum selesai dengan tenggat di dalam jarak pengingat | Muncul di panel pengingat dengan label hari ini atau H-n | | Belum diuji | | | |
-| TC-19 | FR-11 | Tugas dengan tenggat di luar jarak pengingat | Tidak muncul di panel pengingat | | Belum diuji | | | |
-| TC-20 | FR-11 | Tugas dalam jarak pengingat yang diubah statusnya menjadi selesai | Hilang dari panel pengingat | | Belum diuji | | | |
-| TC-21 | FR-11 | Tugas belum selesai yang tenggatnya sudah lewat | Muncul di panel dengan label terlambat | | Belum diuji | | | |
+| TC-18 | FR-11 | Tugas belum selesai dengan tenggat di dalam jarak pengingat | Muncul di panel pengingat dengan label hari ini atau H-n | Sesuai hasil yang diharapkan | Lulus | Andri | 16 Nov 2026 | |
+| TC-19 | FR-11 | Tugas dengan tenggat di luar jarak pengingat | Tidak muncul di panel pengingat | Sesuai hasil yang diharapkan | Lulus | Andri | 16 Nov 2026 | |
+| TC-20 | FR-11 | Tugas dalam jarak pengingat yang diubah statusnya menjadi selesai | Hilang dari panel pengingat | Sesuai hasil yang diharapkan | Lulus | Andri | 16 Nov 2026 | |
+| TC-21 | FR-11 | Tugas belum selesai yang tenggatnya sudah lewat | Muncul di panel dengan label terlambat | Sesuai hasil yang diharapkan | Lulus | Andri | 16 Nov 2026 | |
 | TC-22 | FR-12, NFR-01 | Masuk dengan akun B setelah akun A memiliki tugas | Akun B tidak melihat tugas akun A | Daftar tugas akun B tidak memuat tugas akun A | Lulus | Andre | 16 Nov 2026 | |
 | TC-23 | FR-12, NFR-01 | Akun B mencoba mengubah atau menghapus tugas akun A | Operasi tidak mengubah data akun A | Dari akun B, perintah update dan delete lewat Console ke id tugas akun A menghasilkan data kosong; tugas uji akun A tetap utuh | Lulus | Andre | 16 Nov 2026 | Percobaan pertama keliru dijalankan masih di akun A sehingga satu tugas akun A terhapus (bukan kebocoran data); pengujian diulang memakai tugas uji khusus "UJI TC-23" |
 | TC-24 | NFR-06 | Memuat halaman tugas saat koneksi ke layanan gagal | Muncul pesan galat yang dapat dibaca, bukan halaman kosong | Koneksi ke Supabase diblokir lewat DevTools; tampil pesan "Gagal memuat tugas: TypeError: Failed to fetch" | Lulus | Andre | 16 Nov 2026 | Pesan masih berbahasa teknis, dicatat sebagai BUG-01 |
