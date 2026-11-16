@@ -51,7 +51,7 @@ Tingkat keparahan mengikuti klasifikasi pada docs/3-2 (Kritis, Mayor, Minor).
 
 | ID | Test case | Deskripsi bug | Tingkat | Ditemukan (tanggal, oleh) | Status | Diperbaiki (tanggal, commit) |
 |----|-----------|---------------|---------|---------------------------|--------|------------------------------|
-| BUG-01 | TC-24 | Saat koneksi ke server gagal, pesan yang tampil masih berbahasa teknis ("TypeError: Failed to fetch") dan muncul kartu kosong di bawahnya | Minor | 16 Nov 2026, Andre | Terbuka | |
+| BUG-01 | TC-24 | Saat koneksi ke server gagal, pesan yang tampil masih berbahasa teknis ("TypeError: Failed to fetch") dan muncul kartu kosong di bawahnya | Minor | 16 Nov 2026, Andre | Diperbaiki | 16 Nov 2026, PB-23 (pesan diganti menjadi "Tidak dapat terhubung ke server..." dan kartu kosong disembunyikan; diuji ulang dengan memblokir koneksi ke Supabase) |
 | BUG-02 | | | | | | |
 
 ## 5. Defect density

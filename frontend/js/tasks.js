@@ -148,9 +148,21 @@ async function muatTugas() {
     .order("deadline", { ascending: true });
 
   if (error) {
-    pesan.textContent = "Gagal memuat tugas: " + error.message;
+    // PB-23 (BUG-01): pesan galat yang ramah, tanpa kartu kosong
+    console.error("Gagal memuat tugas:", error);
+    const putus = /fetch|network/i.test(error.message || "");
+    pesan.textContent = putus
+      ? "Tidak dapat terhubung ke server. Periksa koneksi internet, lalu muat ulang halaman."
+      : "Gagal memuat tugas. Silakan muat ulang halaman.";
+    panelPengingat.hidden = true;
+    daftar.innerHTML = "";
+    const kosong = document.createElement("li");
+    kosong.className = "kosong";
+    kosong.textContent = "Daftar tugas belum dapat ditampilkan.";
+    daftar.appendChild(kosong);
     return;
   }
+  panelPengingat.hidden = false;
   tampilkanTugas(data);
 }
 
