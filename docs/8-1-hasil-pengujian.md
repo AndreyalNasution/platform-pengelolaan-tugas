@@ -6,7 +6,7 @@ Acuan: Test Plan pada docs/3-2-risiko-mutu-test-plan.md
 Catatan: lembar ini disiapkan dengan bantuan AI. Kolom hasil diisi oleh penguji saat test case benar-benar dijalankan. Tidak ada hasil yang diisi sebelum pengujian.
 
 ## 1. Lingkungan pengujian
-- Peramban: [ISI, misalnya Chrome atau Edge]
+- Peramban: Google Chrome
 - Cara menjalankan: Live Server (lokal), lalu tautan deployment setelah aplikasi ter-deploy
 - Akun uji: akun A dan akun B (email tidak dicantumkan di dokumen)
 
@@ -15,9 +15,9 @@ Status: Lulus, Gagal, atau Belum diuji. Bila Gagal, catat nomor bug di kolom ket
 
 | ID | Kebutuhan | Skenario | Hasil yang diharapkan | Hasil aktual | Status | Penguji | Tanggal | Keterangan |
 |----|-----------|----------|-----------------------|--------------|--------|---------|---------|------------|
-| TC-01 | FR-01 | Daftar dengan nama, email, dan password yang valid | Akun terbuat dan pengguna dapat melanjutkan ke halaman tugas atau login | | Belum diuji | | | |
-| TC-02 | FR-01 | Daftar dengan email yang sudah terdaftar | Muncul pesan gagal, akun tidak ganda | | Belum diuji | | | |
-| TC-03 | FR-01 | Daftar dengan password yang tidak memenuhi aturan layanan autentikasi | Pendaftaran ditolak dengan pesan yang dapat dibaca | | Belum diuji | | | |
+| TC-01 | FR-01 | Daftar dengan nama, email, dan password yang valid | Akun terbuat dan pengguna dapat melanjutkan ke halaman tugas atau login | Sesuai hasil yang diharapkan | Lulus | Andri | 16 Nov 2026 | |
+| TC-02 | FR-01 | Daftar dengan email yang sudah terdaftar | Muncul pesan gagal, akun tidak ganda | Sesuai hasil yang diharapkan | Lulus | Andri | 16 Nov 2026 | |
+| TC-03 | FR-01 | Daftar dengan password yang tidak memenuhi aturan layanan autentikasi | Pendaftaran ditolak dengan pesan yang dapat dibaca | Sesuai hasil yang diharapkan | Lulus | Andri | 16 Nov 2026 | |
 | TC-04 | FR-02 | Masuk dengan email dan password yang benar | Halaman daftar tugas terbuka | Halaman daftar tugas terbuka | Lulus | Andre | 15 Nov 2026 | Diuji ulang 16 Nov 2026 pada tampilan login baru: Lulus |
 | TC-05 | FR-02 | Masuk dengan password yang salah | Muncul pesan gagal, tetap di halaman login | Muncul pesan gagal, tetap di halaman login | Lulus | Andre | 15 Nov 2026 | Diuji ulang 16 Nov 2026 pada tampilan login baru: Lulus |
 | TC-06 | FR-03 | Klik tombol Keluar | Sesi berakhir dan kembali ke halaman login | Kembali ke halaman login | Lulus | Andre | 15 Nov 2026 | |
@@ -42,9 +42,9 @@ Status: Lulus, Gagal, atau Belum diuji. Bila Gagal, catat nomor bug di kolom ket
 
 ## 3. Ringkasan hasil
 - Jumlah test case: 24
-- Lulus: [ISI]
-- Gagal: [ISI]
-- Belum diuji: [ISI]
+- Lulus: 24
+- Gagal: 0
+- Belum diuji: 0
 
 ## 4. Bug log
 Tingkat keparahan mengikuti klasifikasi pada docs/3-2 (Kritis, Mayor, Minor).
@@ -56,6 +56,6 @@ Tingkat keparahan mengikuti klasifikasi pada docs/3-2 (Kritis, Mayor, Minor).
 
 ## 5. Defect density
 Defect density = jumlah bug valid / (jumlah baris kode / 1000).
-- Jumlah bug valid: [ISI]
-- Jumlah baris kode (HTML, CSS, JavaScript buatan tim): [ISI]
-- Defect density: [ISI] bug per 1000 baris kode
+- Jumlah bug valid: 1 (BUG-01, Minor)
+- Jumlah baris kode (baris tidak kosong pada file HTML, CSS, dan JavaScript di folder frontend, dihitung 16 November 2026): 1094
+- Defect density: 0.91 bug per 1000 baris kode
