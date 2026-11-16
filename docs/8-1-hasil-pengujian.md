@@ -18,8 +18,8 @@ Status: Lulus, Gagal, atau Belum diuji. Bila Gagal, catat nomor bug di kolom ket
 | TC-01 | FR-01 | Daftar dengan nama, email, dan password yang valid | Akun terbuat dan pengguna dapat melanjutkan ke halaman tugas atau login | | Belum diuji | | | |
 | TC-02 | FR-01 | Daftar dengan email yang sudah terdaftar | Muncul pesan gagal, akun tidak ganda | | Belum diuji | | | |
 | TC-03 | FR-01 | Daftar dengan password yang tidak memenuhi aturan layanan autentikasi | Pendaftaran ditolak dengan pesan yang dapat dibaca | | Belum diuji | | | |
-| TC-04 | FR-02 | Masuk dengan email dan password yang benar | Halaman daftar tugas terbuka | Halaman daftar tugas terbuka | Lulus | Andre | 15 Nov 2026 | |
-| TC-05 | FR-02 | Masuk dengan password yang salah | Muncul pesan gagal, tetap di halaman login | Muncul pesan gagal, tetap di halaman login | Lulus | Andre | 15 Nov 2026 | |
+| TC-04 | FR-02 | Masuk dengan email dan password yang benar | Halaman daftar tugas terbuka | Halaman daftar tugas terbuka | Lulus | Andre | 15 Nov 2026 | Diuji ulang 16 Nov 2026 pada tampilan login baru: Lulus |
+| TC-05 | FR-02 | Masuk dengan password yang salah | Muncul pesan gagal, tetap di halaman login | Muncul pesan gagal, tetap di halaman login | Lulus | Andre | 15 Nov 2026 | Diuji ulang 16 Nov 2026 pada tampilan login baru: Lulus |
 | TC-06 | FR-03 | Klik tombol Keluar | Sesi berakhir dan kembali ke halaman login | Kembali ke halaman login | Lulus | Andre | 15 Nov 2026 | |
 | TC-07 | FR-04 | Membuka halaman tugas tanpa login | Diarahkan ke halaman login | Membuka /frontend/tugas.html setelah keluar diarahkan ke halaman login | Lulus | Andre | 15 Nov 2026 | |
 | TC-08 | FR-05 | Menambah tugas dengan judul, mata kuliah, dan tenggat lewat pop-up | Tugas muncul di daftar | | Belum diuji | | | |
@@ -36,9 +36,9 @@ Status: Lulus, Gagal, atau Belum diuji. Bila Gagal, catat nomor bug di kolom ket
 | TC-19 | FR-11 | Tugas dengan tenggat di luar jarak pengingat | Tidak muncul di panel pengingat | | Belum diuji | | | |
 | TC-20 | FR-11 | Tugas dalam jarak pengingat yang diubah statusnya menjadi selesai | Hilang dari panel pengingat | | Belum diuji | | | |
 | TC-21 | FR-11 | Tugas belum selesai yang tenggatnya sudah lewat | Muncul di panel dengan label terlambat | | Belum diuji | | | |
-| TC-22 | FR-12, NFR-01 | Masuk dengan akun B setelah akun A memiliki tugas | Akun B tidak melihat tugas akun A | | Belum diuji | | | |
-| TC-23 | FR-12, NFR-01 | Akun B mencoba mengubah atau menghapus tugas akun A | Operasi tidak mengubah data akun A | | Belum diuji | | | |
-| TC-24 | NFR-06 | Memuat halaman tugas saat koneksi ke layanan gagal | Muncul pesan galat yang dapat dibaca, bukan halaman kosong | | Belum diuji | | | |
+| TC-22 | FR-12, NFR-01 | Masuk dengan akun B setelah akun A memiliki tugas | Akun B tidak melihat tugas akun A | Daftar tugas akun B tidak memuat tugas akun A | Lulus | Andre | 16 Nov 2026 | |
+| TC-23 | FR-12, NFR-01 | Akun B mencoba mengubah atau menghapus tugas akun A | Operasi tidak mengubah data akun A | Dari akun B, perintah update dan delete lewat Console ke id tugas akun A menghasilkan data kosong; tugas uji akun A tetap utuh | Lulus | Andre | 16 Nov 2026 | Percobaan pertama keliru dijalankan masih di akun A sehingga satu tugas akun A terhapus (bukan kebocoran data); pengujian diulang memakai tugas uji khusus "UJI TC-23" |
+| TC-24 | NFR-06 | Memuat halaman tugas saat koneksi ke layanan gagal | Muncul pesan galat yang dapat dibaca, bukan halaman kosong | Koneksi ke Supabase diblokir lewat DevTools; tampil pesan "Gagal memuat tugas: TypeError: Failed to fetch" | Lulus | Andre | 16 Nov 2026 | Pesan masih berbahasa teknis, dicatat sebagai BUG-01 |
 
 ## 3. Ringkasan hasil
 - Jumlah test case: 24
@@ -51,7 +51,8 @@ Tingkat keparahan mengikuti klasifikasi pada docs/3-2 (Kritis, Mayor, Minor).
 
 | ID | Test case | Deskripsi bug | Tingkat | Ditemukan (tanggal, oleh) | Status | Diperbaiki (tanggal, commit) |
 |----|-----------|---------------|---------|---------------------------|--------|------------------------------|
-| BUG-01 | | | | | | |
+| BUG-01 | TC-24 | Saat koneksi ke server gagal, pesan yang tampil masih berbahasa teknis ("TypeError: Failed to fetch") dan muncul kartu kosong di bawahnya | Minor | 16 Nov 2026, Andre | Terbuka | |
+| BUG-02 | | | | | | |
 
 ## 5. Defect density
 Defect density = jumlah bug valid / (jumlah baris kode / 1000).
