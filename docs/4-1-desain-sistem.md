@@ -150,7 +150,13 @@ Penjelasan:
 
 ## 5. Wireframe dan Mockup
 
-Mockup dibuat di Figma oleh Andri, terdiri atas tiga frame: Beranda (daftar tugas), Pop-up Tambah Tugas, dan Komponen MVP (label status, label pengingat, tombol, baris tugas). Gambar mockup disimpan di folder docs/mockup. [ISI: tambahkan gambar ekspor dari Figma]
+Mockup dibuat di Figma oleh Andri, terdiri atas tiga frame: Beranda (daftar tugas), Pop-up Tambah Tugas, dan Komponen MVP (label status, label pengingat, tombol, baris tugas). Gambar mockup disimpan di folder docs.
+
+![Mockup Beranda](6-5-mockup-beranda.png)
+
+![Mockup Form Tambah dan Ubah Tugas](6-5-mockup-form-tugas.png)
+
+![Mockup Komponen MVP](6-5-mockup-komponen.png)
 
 Perbedaan mockup dengan aplikasi:
 | Bagian mockup | Status di aplikasi |
