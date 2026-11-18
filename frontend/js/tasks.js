@@ -97,6 +97,85 @@ btnKeluar.insertAdjacentElement("beforebegin", grupAtas);
 grupAtas.appendChild(btnBuka);
 grupAtas.appendChild(btnKeluar);
 
+// PB-23: sidebar dan sapaan seperti mockup (hanya tampilan, tampil di layar lebar)
+document.body.classList.add("halaman-tugas");
+const sidebar = document.createElement("aside");
+sidebar.className = "sidebar";
+const sbMerek = document.createElement("div");
+sbMerek.className = "sb-merek";
+const sbLogo = document.createElement("span");
+sbLogo.className = "sb-logo";
+sbLogo.textContent = "\u2713";
+const sbNamaApp = document.createElement("span");
+sbNamaApp.textContent = "TugasKu";
+sbMerek.appendChild(sbLogo);
+sbMerek.appendChild(sbNamaApp);
+const sbTambah = document.createElement("button");
+sbTambah.type = "button";
+sbTambah.className = "sb-tambah";
+sbTambah.textContent = "+ Tambah Tugas";
+sbTambah.addEventListener("click", () => btnBuka.click());
+const sbMenu = document.createElement("div");
+sbMenu.className = "sb-menu aktif";
+sbMenu.textContent = "Beranda";
+const sbBawah = document.createElement("div");
+sbBawah.className = "sb-bawah";
+const sbUser = document.createElement("div");
+sbUser.className = "sb-user";
+const sbAvatar = document.createElement("span");
+sbAvatar.className = "sb-avatar";
+const sbIdentitas = document.createElement("div");
+sbIdentitas.className = "sb-identitas";
+const sbNama = document.createElement("div");
+sbNama.className = "sb-nama";
+const sbEmail = document.createElement("div");
+sbEmail.className = "sb-email";
+sbIdentitas.appendChild(sbNama);
+sbIdentitas.appendChild(sbEmail);
+sbUser.appendChild(sbAvatar);
+sbUser.appendChild(sbIdentitas);
+const sbKeluar = document.createElement("button");
+sbKeluar.type = "button";
+sbKeluar.className = "sekunder sb-keluar";
+sbKeluar.textContent = "Keluar";
+sbKeluar.addEventListener("click", () => btnKeluar.click());
+sbBawah.appendChild(sbUser);
+sbBawah.appendChild(sbKeluar);
+sidebar.appendChild(sbMerek);
+sidebar.appendChild(sbTambah);
+sidebar.appendChild(sbMenu);
+sidebar.appendChild(sbBawah);
+document.body.prepend(sidebar);
+
+const judulHalaman = document.querySelector(".baris-atas h1");
+const tanggalHari = document.createElement("p");
+tanggalHari.className = "tanggal-hari";
+if (judulHalaman) judulHalaman.insertAdjacentElement("beforebegin", tanggalHari);
+
+function tampilkanSapaan(user) {
+  const meta = user.user_metadata || {};
+  const email = user.email || "";
+  const nama = (meta.full_name || email.split("@")[0] || "Pengguna").trim();
+  const namaDepan = nama.split(" ")[0];
+  const jam = new Date().getHours();
+  const salam = jam < 11 ? "Selamat pagi" : jam < 15 ? "Selamat siang" : jam < 18 ? "Selamat sore" : "Selamat malam";
+  if (judulHalaman) judulHalaman.textContent = salam + ", " + namaDepan;
+  tanggalHari.textContent = new Date().toLocaleDateString("id-ID", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+  sbNama.textContent = nama;
+  sbEmail.textContent = email;
+  sbAvatar.textContent = nama
+    .split(" ")
+    .filter((k) => k)
+    .slice(0, 2)
+    .map((k) => k[0].toUpperCase())
+    .join("");
+}
+
 function modalTerbuka() {
   return latarModal.classList.contains("terbuka");
 }
@@ -137,6 +216,7 @@ async function mulai() {
     return;
   }
   infoUser.textContent = "Masuk sebagai " + data.session.user.email;
+  tampilkanSapaan(data.session.user);
   await muatTugas();
 }
 
