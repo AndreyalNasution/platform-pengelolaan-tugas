@@ -104,7 +104,7 @@ erDiagram
   AUTH_USERS {
     uuid id PK
     text email
-    jsonb metadata "nama lengkap saat daftar"
+    jsonb raw_user_meta_data "berisi full_name"
   }
   TASKS {
     uuid id PK
@@ -119,7 +119,7 @@ erDiagram
 ```
 
 Keterangan:
-- AUTH_USERS adalah tabel akun bawaan Supabase Auth. Penyimpanan nama lengkap di metadata akun perlu dicek ulang terhadap kode auth.js. [CEK ANDRE]
+- AUTH_USERS adalah tabel akun bawaan Supabase Auth. Nama lengkap disimpan di metadata akun (raw_user_meta_data, kunci full_name) saat pendaftaran melalui sb.auth.signUp pada auth.js, sehingga tidak diperlukan tabel profil terpisah.
 - Satu pengguna dapat memiliki banyak tugas, dan setiap tugas dimiliki tepat satu pengguna (TASKS.user_id merujuk AUTH_USERS.id).
 - Row Level Security pada tabel tasks memastikan pengguna hanya dapat membaca, menambah, mengubah, dan menghapus baris dengan user_id miliknya sendiri (diuji pada TC-22 dan TC-23).
 
