@@ -6,7 +6,7 @@ Kartu: PB-24
 Catatan: catatan ini disusun dengan bantuan AI berdasarkan langkah yang dilakukan tim.
 
 ## 1. Alamat aplikasi
-https://main.d2yykzt469m44j.amplifyapp.com
+https://pengelolatugas.my.id (domain milik Jhon yang disambungkan ke aplikasi). Alamat bawaan AWS Amplify: https://main.d2yykzt469m44j.amplifyapp.com
 
 ## 2. Platform dan cara kerja
 - Hosting: AWS Amplify, tersambung ke repositori GitHub platform-pengelolaan-tugas pada branch main.

@@ -165,5 +165,6 @@ Perbedaan mockup dengan aplikasi:
 | Menu aksi titik tiga (Ubah dan Hapus) | Diterapkan, tanpa ikon |
 | Form tambah dan ubah tugas sebagai pop-up | Diterapkan |
 | Daftar tugas dikelompokkan per status dan dapat dilipat | Diterapkan |
-| Sidebar, sapaan dan tanggal, tampilan kolom seperti tabel, tombol plus-minus jarak pengingat | Tidak diterapkan karena keterbatasan waktu |
+| Sidebar, sapaan, dan tanggal | Diterapkan pada 18 November (tampil di layar lebar, disembunyikan di HP) |
+| Tampilan kolom seperti tabel, tombol plus-minus jarak pengingat, ikon pada menu aksi | Tidak diterapkan karena keterbatasan waktu |
 | Halaman login | Tidak ada di mockup; didesain terpisah pada 15 November (desain dengan bantuan Manus) |
